@@ -1,0 +1,11 @@
+# no build folder
+./build/*
+./build*/
+build/
+
+# user filed
+*.user
+
+# don't include images
+*.jpg
+*.png
