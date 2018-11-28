@@ -1,0 +1,4 @@
+%YAML:1.0
+---
+max_value: 255.
+threshold: 100.
