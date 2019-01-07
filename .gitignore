@@ -9,3 +9,4 @@ build/
 # don't include images
 *.jpg
 *.png
+*.8-pre1

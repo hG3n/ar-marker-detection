@@ -28,9 +28,9 @@ file(COPY config DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 set(ALL_LIBS ${OpenCV_LIBS})
 
 # specify executable
-add_executable(feature-detection ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(fea ${SOURCE_FILES} ${HEADER_FILES})
 
 # get include directories
 include_directories(${OpenCV_INCLUDE_DIRS} ${HEADER_FILES})
 
-target_link_libraries(feature-detection ${ALL_LIBS})
+target_link_libraries(fea ${ALL_LIBS})

@@ -29,7 +29,7 @@ Camera::Camera(const CameraParams &params)
 {  }
 
 
-bool Camera::calibrate(const std::vector<cv::Mat> &calibration_images, double square_size, cv::Size chessboard_size, bool verbose = false, bool show_projection = false)
+bool Camera::calibrate(const std::vector<cv::Mat> &calibration_images, double square_size, cv::Size chessboard_size, CameraParams &params, bool verbose = false, bool show_projection = false)
 {
 
     if(is_calibrated_)
@@ -93,6 +93,11 @@ bool Camera::calibrate(const std::vector<cv::Mat> &calibration_images, double sq
 
     cv::Size imagesize = cv::Size(calibration_images[0].size());
     double rms = cv::calibrateCamera(object_points, image_points, imagesize, intrinsics_, distortion_coefficients_, rvecs, tvecs);
+
+    params.width = image_width_;
+    params.height = image_height_;
+    params.dist_coeffs = distortion_coefficients_;
+    params.intrinsics = intrinsics_;
 
     if(verbose)
         std::cout << " ! Calibrated camera with reprojection error of: " << rms << std::endl;

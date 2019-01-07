@@ -19,6 +19,7 @@ struct BinarizeParams {
         double threshold;
 };
 
+
 class Config
 {
     public:

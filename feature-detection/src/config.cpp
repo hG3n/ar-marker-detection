@@ -1,4 +1,5 @@
 #include "config.h"
+#include <iostream>
 
 bool Config::saveApplicationConfig(const std::string &filename, const ApplicationParams &app_params)
 {
@@ -72,10 +73,11 @@ bool Config::loadCameraConfig(const std::string &filename, CameraParams *params)
     if (!fs_in.isOpened())
         return false;
 
-    fs_in["width"] >> params->dist_coeffs;
-    fs_in["height"] >> params->dist_coeffs;
+    fs_in["width"] >> params->width;
+    fs_in["height"] >> params->height;
     fs_in["intrinsics"] >> params->intrinsics;
     fs_in["dist_coeffs"] >> params->dist_coeffs;
+
     return true;
 }
 

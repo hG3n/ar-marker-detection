@@ -19,7 +19,7 @@ class Camera
         Camera(int width, int height);
         Camera(const CameraParams &params);
 
-        bool calibrate(const std::vector<cv::Mat> &calibration_images, double pattern_size, cv::Size chessboard_size, bool verbose, bool show_projection);
+        bool calibrate(const std::vector<cv::Mat> &calibration_images, double pattern_size, cv::Size chessboard_size, CameraParams &params, bool verbose, bool show_projection);
         void initRectification();
 
         void getRectifiedImage(const cv::Mat & image, cv::Mat & image_undistorted);
