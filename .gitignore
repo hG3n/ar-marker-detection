@@ -10,3 +10,15 @@ build/
 *.jpg
 *.png
 *.8-pre1
+
+# exclude compiled obj files
+*.o
+
+# exclude jetbrains stuff
+.idea/
+
+# exclude user files
+*.user
+
+# exclude clion buil dir
+feature-detection/cmake-build-debug

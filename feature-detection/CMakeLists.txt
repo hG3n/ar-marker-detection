@@ -15,7 +15,9 @@ set(SOURCE_FILES
         src/path.cpp
         src/camera.cpp
         src/json11.cpp
-        src/config.cpp)
+        src/config.cpp
+        src/misc.cpp
+        src/file_io.cpp)
 
 set (HEADER_FILES "inc/")
 

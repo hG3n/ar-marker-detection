@@ -135,7 +135,7 @@ void Camera::getRectifiedImage(const cv::Mat & image, cv::Mat & image_undistorte
     //    image_undistorted = image;
 
     cv::undistort(image, image_undistorted, intrinsics_, distortion_coefficients_, rectify_intrinsics_);
-    //    cv::remap(image_undistorted, image_undistorted, rectify_map_1_, rectify_map_2_, cv::INTER_LINEAR);
+//        cv::remap(image, image_undistorted, rectify_map_1_, rectify_map_2_, cv::INTER_LINEAR);
 }
 
 const cv::Mat &Camera::getIntrinsics()
