@@ -17,7 +17,9 @@ set(SOURCE_FILES
         src/json11.cpp
         src/config.cpp
         src/misc.cpp
-        src/file_io.cpp)
+        src/file_io.cpp
+        src/marker.cpp
+        src/marker_detector.cpp)
 
 set (HEADER_FILES "inc/")
 

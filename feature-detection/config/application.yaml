@@ -1,7 +1,7 @@
 %YAML:1.0
 ---
 calibration_image_path: calibration_images/set_small
-single_test_image_path: "images/test5.jpg"
+single_test_image_path: "images/new/1.jpg"
 fiducial_image_path: "images/fiducial.png"
-image_sequence_path: ""
+image_sequence_path: "images/new"
 output_window_size: [ 1280, 720 ]
