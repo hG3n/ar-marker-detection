@@ -82,7 +82,7 @@ void findCameraPose(const std::vector<Marker> &current_markers)
 {
 
     Marker origin_image_space;
-    for (auto e: current_markers)
+    for (const auto &e: current_markers)
         if (e.getId() == 0)
             origin_image_space = e;
 
