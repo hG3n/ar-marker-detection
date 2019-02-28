@@ -22,3 +22,6 @@ build/
 
 # exclude clion buil dir
 feature-detection/cmake-build-debug
+
+# fuck yo mac os
+.DS_Store

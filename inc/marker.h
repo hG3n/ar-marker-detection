@@ -30,6 +30,8 @@ public:
 
     cv::Mat getMarkerMap() const;
 
+    std::vector<cv::Point2f> getCorners() const;
+
 
 private:
     std::vector<cv::Point2f> corners_;

@@ -27,11 +27,12 @@ static bool CALIBRATE = false;
 
 bool calibrateCamera(Camera &cam, const std::string &image_folder);
 
-void findCameraPose(const std::vector<Marker> &current_markers);
+void findMarkerInImage(unsigned char *image_data, int width, int height);
 
 /// MAIN
 int main()
 {
+    // load configs
     ApplicationParams app_config;
     if (!Config::loadApplicationConfig("config/application.yaml", &app_config))
         std::cout << "Error: loading Application config!" << std::endl;
@@ -39,6 +40,10 @@ int main()
     BinarizeParams binarize_config;
     if (!Config::loadBinarizeConfig("config/binarize.yaml", &binarize_config))
         std::cout << "Error: loading Binarization config!" << std::endl;
+
+
+    /// ---- replace this by receiving camera intrinsics from unity
+    /// ---- get pointer to image from unity
 
     /// create camera
     Camera camera;
@@ -57,7 +62,12 @@ int main()
     }
     camera.initRectification();
 
+
+    /// ---- initialize recification paramesters
+
     // load & rectify image
+
+    /// ---- cut that out
     cv::Mat image = cv::imread(app_config.single_test_image_path);
     cv::Mat rectified;
     cv::Mat rectified_gray;
@@ -68,31 +78,13 @@ int main()
     cv::Mat binarized;
     cv::threshold(rectified_gray, binarized, binarize_config.threshold, binarize_config.max_value, cv::THRESH_BINARY);
 
+
+    /// ---- put all this into one specific function, that returns a result to unity
     auto marker_class_start = Stopwatch::getStart();
     MarkerDetector md(81, 9);
     std::vector<Marker> current_markers;
     md.findMarkers(binarized, &current_markers);
     std::cout << "MarkerDetector finding time (ms): " << Stopwatch::getElapsed(marker_class_start);
-
-    /// Calculate Camera pose
-    findCameraPose(current_markers);
-}
-
-void findCameraPose(const std::vector<Marker> &current_markers)
-{
-
-    Marker origin_image_space;
-    for (const auto &e: current_markers)
-        if (e.getId() == 0)
-            origin_image_space = e;
-
-    std::cout << origin_image_space << std::endl;
-    auto origin_centroid = origin_image_space.getCentroid();
-
-    /// determine world coord origin
-
-
-
 }
 
 /**
@@ -131,5 +123,32 @@ bool calibrateCamera(Camera &cam, const std::string &image_folder)
         return true;
     }
     return false;
+}
+
+void findMarkerInImage(unsigned char *image_data, int width, int height)
+{
+    cv::Mat image(height, width, CV_8SC3, image_data);
+
+    std::cout << "Current image: " << std::endl;
+    std::cout << "width: " << width << std::endl;
+    std::cout << "height: " << height << std::endl;
+
+    /// binarize image
+    cv::Mat binarized;
+
+    int threshold = 100;
+    int max_value =  255;
+    cv::threshold(image, binarized, threshold, max_value, cv::THRESH_BINARY);
+
+    /// ---- put all this into one specific function, that returns a result to unity
+    MarkerDetector md(81, 9);
+    std::vector<Marker> current_markers;
+    md.findMarkers(binarized, &current_markers);
+    
+    for(auto marker : current_markers) {
+        std::cout << marker.getId() << std::endl;
+    }
+
+
 }
 

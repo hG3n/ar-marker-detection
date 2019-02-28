@@ -8,6 +8,7 @@
 #include <opencv2/imgproc.hpp>
 
 #include "misc.h"
+#include "stopwatch.h"
 
 MarkerDetector::MarkerDetector()
 {}
@@ -35,11 +36,16 @@ MarkerDetector::MarkerDetector(int pattern_size, int pattern_segments, bool verb
 void MarkerDetector::findMarkers(const cv::Mat &binarized_image, std::vector<Marker> *active_markers)
 {
     // find shapes
+    auto find_shapes_start = Stopwatch::getStart();
     std::vector<std::vector<cv::Point2f>> shapes;
     findShapeCorners(binarized_image, shapes);
+    std::cout  << "Time to find corners: " << Stopwatch::getElapsed(find_shapes_start);
 
+
+    auto process_shapes_start = Stopwatch::getStart();
     for (size_t poly_idx = 0; poly_idx < shapes.size(); ++poly_idx)
     {
+
         // sort corner points clockwise starting with tl point
         std::vector<cv::Point2f> corner_points = shapes[poly_idx];
         auto corner_points_sorted = sortVertices(corner_points);

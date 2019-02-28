@@ -32,9 +32,15 @@ cv::Point2f Marker::getCentroid() const
     return Misc::findCentroid(corners_);
 };
 
-std::vector<uchar> Marker::getMarkerMap() const
+cv::Mat Marker::getMarkerMap() const
 {
     return marker_map_;
+}
+
+
+std::vector<cv::Point2f> Marker::getCorners() const
+{
+    return corners_;
 }
 
 std::ostream &operator<<(std::ostream &os, const Marker &marker)
