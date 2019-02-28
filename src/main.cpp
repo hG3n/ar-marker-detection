@@ -13,8 +13,6 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/calib3d.hpp>
 
-#include "feature_detector.h"
-#include "path.h"
 #include "camera.h"
 #include "config.h"
 #include "stopwatch.h"

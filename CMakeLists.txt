@@ -11,8 +11,6 @@ find_package(OpenCV REQUIRED)
 
 set(SOURCE_FILES
         src/main.cpp
-        src/feature_detector.cpp
-        src/path.cpp
         src/camera.cpp
         src/json11.cpp
         src/config.cpp
