@@ -24,7 +24,6 @@ public:
     static void showImage(cv::Mat &image, const std::string &name = "Default", int scale = -1);
 
 
-
     /**
      * Finds the mean centroid of a point list
      */

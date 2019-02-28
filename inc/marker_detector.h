@@ -12,34 +12,74 @@
 
 #include "marker.h"
 
-class MarkerDetector
-{
+class MarkerDetector {
 
 public:
-    
+
+    /**
+     * c'tor
+     */
     MarkerDetector();
 
+    /**
+     * custom c'tor
+     */
     MarkerDetector(int pattern_size, int pattern_segements, bool verbose = false);
 
-    void findMarkers(const cv::Mat &binarized_image, std::vector<Marker> *active_markers);
+    /**
+     * Function to find markers in a given image
+     * @param binarized_image
+     * @param active_markers
+     */
+    void findMarkers(const cv::Mat &binarized_image, std::vector <Marker> *active_markers);
 
 
 private:
-    void findShapeCorners(const cv::Mat &binarized_image, std::vector<std::vector<cv::Point2f>> &filtered_corners);
+    /**
+     * Finds shapes in an image and their respective corners
+     */
+    void
+    findShapeCorners(const cv::Mat &binarized_image, std::vector <std::vector<cv::Point2f>> &filtered_corners) const;
 
-
+    /**
+     * Creates a map containing the current marker layout in binary data
+     */
     void createMarkerMap(const cv::Mat &warped_shape, cv::Mat &marker_map, bool use_area_mean = false);
 
+    /**
+     * Validates a found marker
+     * @param marker_map
+     * @return
+     */
     int validateMarker(const cv::Mat &marker_map);
 
-    std::vector<cv::Point2f> sortVertices(std::vector<cv::Point2f> point_list) const;
+    /**
+     * Sorts pointlist clockwise starting with the top left element
+     * @param point_list
+     * @return
+     */
+    static std::vector <cv::Point2f> sortVertices(std::vector <cv::Point2f> point_list);
+
+    /**
+     * Finds the mean centroid of a point list
+     * @param point_list
+     * @return
+     */
+    static cv::Point2f findCentroid(const std::vector <cv::Point2f> &point_list);
+
+    /**
+     * Converts radians to degrees
+     * @param value
+     * @return
+     */
+    static double rad2deg(double value);
 
 
-    /// member
+    /// private members
     int pattern_size;
     int pattern_segment_size;
 
-    std::vector<cv::Point2f> transform_matrix_;
+    std::vector <cv::Point2f> transform_matrix_;
     bool verbose_;
 };
 
